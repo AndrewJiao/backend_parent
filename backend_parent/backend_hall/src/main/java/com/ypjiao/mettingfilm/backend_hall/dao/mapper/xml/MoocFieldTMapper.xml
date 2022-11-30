@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ypjiao.mettingfilm.backend_hall.dao.mapper.MoocFieldTMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ypjiao.mettingfilm.backend_hall.dao.entity.MoocFieldT">
+        <id column="UUID" property="uuid" />
+        <result column="cinema_id" property="cinemaId" />
+        <result column="film_id" property="filmId" />
+        <result column="begin_time" property="beginTime" />
+        <result column="end_time" property="endTime" />
+        <result column="hall_id" property="hallId" />
+        <result column="hall_name" property="hallName" />
+        <result column="price" property="price" />
+    </resultMap>
+    <select id="describeShow" resultType="com.ypjiao.mettingfilm.backend_hall.controller.vo.HallRespVo">
+        select (select cinema.cinema_name from mooc_cinema_t cinema where cinema.UUID = field.cinema_id) as cinemaName,
+               field.hall_name as hallName,
+               (select film.film_name from mooc_film_t film where film.UUID = field.film_id) as filmName,
+               (select h_dict.show_name from mooc_hall_dict_t h_dict where h_dict.UUID = field.hall_id) as hallTypeName,
+               field.begin_time as beginTime,
+               field.end_time as endTime,
+               field.price as filmPrice
+        from mooc_field_t field ${ew.customSqlSegment}
+    </select>
+</mapper>

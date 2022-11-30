@@ -1,0 +1,37 @@
+logging:
+  config: classpath:logback.xml
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8080
+
+zuul:
+  routes:    ## 路由规则
+    #prefix: /meetingfilm/ # 统一前缀
+    film-service: # 路由服务，应用的名称
+      path: /film-api/**  # 路由路径
+      retryable: true  # 是否允许重试，饿汉模式
+      serviceId: film-service
+    hall-service: # 路由服务，应用的名称
+      path: /hall-api/**  # 路由路径
+      retryable: true  # 是否允许重试，饿汉模式
+      serviceId: hall-service
+    user-service: # 路由服务，应用的名称
+      path: /user-api/**  # 路由路径
+      retryable: true  # 是否允许重试，饿汉模式
+      serviceId: user-service
+    cinemas-service: # 路由服务，应用的名称
+      path: /cinemas-api/**  # 路由路径
+      retryable: true  # 是否允许重试，饿汉模式
+      serviceId: cinemas-service
+
+  ##zuul默认会过滤一些头信息，此处设置覆盖默认过滤设置
+#  sensitive-headers: "authorization"
+  ## 与sensitive-headers效果相反
+#  ignored-headers:
+spring:
+  application:
+    name: zuul-service

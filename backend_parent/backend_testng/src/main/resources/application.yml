@@ -1,0 +1,16 @@
+
+spring:
+  application:
+    name: user-service
+
+
+logging:
+  config: classpath:logback.xml
+  level:
+      # 打印sql
+    com.ypjiao.mettingfilm.dao.entity: debug
+
+
+
+server:
+  port: 7202

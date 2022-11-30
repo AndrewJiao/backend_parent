@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<suite name="自动测试报告">
+    <test name="测试模块">
+        <classes>
+            <!--测试类-->
+            <class name="com.ypjiao.testng.test.TestNG"/>
+            <class name="com.ypjiao.testng.test.TestMooc"/>
+        </classes>
+    </test>
+
+    <!--报告类-->
+    <listeners>
+        <listener class-name="com.ypjiao.testng.extentreport.ExtentTestNGIReporterListener"/>
+    </listeners>
+
+</suite>
